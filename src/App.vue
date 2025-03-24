@@ -1,9 +1,10 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
+
 </script>
 
 <template>
-  <div>
+  <div class="container mx-auto">
+    <h1 class="bg-red-500">Prdel, riť, tancovanie</h1>
     
   </div>
   <HelloWorld msg="Vite + Vue" />
