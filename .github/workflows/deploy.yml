@@ -1,0 +1,51 @@
+# Jednoduchý workflow pre nasadenie statického obsahu na GitHub Pages
+name: Deploy static content to Pages
+
+on:
+  # Spúšťa sa pri pushoch do hlavnej vetvy (zmeň 'main' na 'master', ak používaš master)
+  push:
+    branches: ['master'] # <--- POZOR! Zmeň na 'master', lebo podľa tvojho obrázka používaš vetvu master!
+
+  # Umožňuje spustiť tento workflow manuálne zo záložky Actions
+  workflow_dispatch:
+
+# Nastavuje GITHUB_TOKEN povolenia na umožnenie nasadenia na GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Povolí iba jedno súbežné nasadenie, zruší staršie behy, ak prídu nové
+concurrency:
+  group: 'pages'
+  cancel-in-progress: true
+
+jobs:
+  # Jedna úloha nasadenia, lebo len nasadzujeme
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout # Stiahne tvoj kód
+        uses: actions/checkout@v4
+      - name: Set up Node # Nastaví Node.js (použi verziu, ktorá ti vyhovuje)
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20 # Alebo 18, 16...
+          cache: 'npm'
+      - name: Install dependencies # Nainštaluje závislosti
+        run: npm ci # 'ci' je rýchlejšie a bezpečnejšie pre CI/CD ako 'install'
+      - name: Build # Spustí build proces!
+        run: npm run build
+      - name: Setup Pages # Pripraví Pages
+        uses: actions/configure-pages@v4
+      - name: Upload artifact # Nahrá výsledok buildu
+        uses: actions/upload-pages-artifact@v3 # Alebo v4
+        with:
+          # Nahrá priečinok 'dist' (alebo iný, ak ho tvoj build vytvára inde)
+          path: './dist' # <--- Kľúčový riadok!
+      - name: Deploy to GitHub Pages # Nasadí nahratý artefakt
+        id: deployment
+        uses: actions/deploy-pages@v4
