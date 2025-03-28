@@ -21,11 +21,11 @@
           
           <!-- Action Buttons -->
           <div class="flex items-center space-x-2">
-            <button class="bg-teal-500 text-white px-4 py-2 rounded-md text-sm">
+            <button class="font-medium bg-[#45dbcc] text-white px-4 py-2 rounded-full text-sm h-[50px] border-2 border-[#45dbcc] hover:bg-white hover:text-[#004155] hover:border-[bg-white] transition duration-100 ease-in-out">
               {{ actionButtons.primary }}
             </button>
             
-            <button class="border border-gray-300 text-gray-700 px-4 py-2 rounded-md text-sm flex items-center">
+            <button class="border border-gray-300 text-gray-700 px-4 py-2 rounded text-sm flex items-center">
               {{ actionButtons.secondary }}
               <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
