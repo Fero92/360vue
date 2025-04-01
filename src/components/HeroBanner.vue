@@ -1,6 +1,6 @@
 <template>
     <section class="hero bg-[#004155] text-white py-16">
-      <div class="container mx-auto px-4">
+      <div class="container mx-auto px-30">
         <div class="flex flex-col md:flex-row items-center justify-between">
           <div class="hero__content md:w-1/2 mb-10 md:mb-0">
             <div class="text-4xl font-medium inline-block bg-[#45dbcc] text-[#004155] px-3 py-1 rounded mb-4">
